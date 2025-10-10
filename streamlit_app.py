@@ -3,7 +3,7 @@ import streamlit as st
 from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark import Session
 from snowflake.snowpark.functions import col
-
+import requests
 
 # Function to get session
 def get_session():
@@ -25,7 +25,6 @@ def get_session():
 # Get session
 session = get_session()
 
-import requests
 # Fetch fruit info from external API
 smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
 st.text(smoothiefroot_response)
