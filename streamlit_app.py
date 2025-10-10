@@ -3,7 +3,7 @@ import streamlit as st
 from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark import Session
 from snowflake.snowpark.functions import col
-
+import requests
 
 # Function to get session
 def get_session():
@@ -53,7 +53,6 @@ ingredients_list = st.multiselect('Choose up to 5 ingredients:'
 if ingredients_list:
     #st.write (ingredients_list)
     #st.text(ingredients_list)
-
     ingredients_string = ''
 
     for fruit_chosen in ingredients_list:
@@ -74,8 +73,7 @@ if ingredients_list:
         st.success(order_message, icon="✅")
 
 
-import requests
+
 # Fetch fruit info from external API
 smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
-# st.text(smoothiefroot_response.json())
 sf_df = st.dataframe(data=smoothiefroot_response.json(),use_container_width=True)
