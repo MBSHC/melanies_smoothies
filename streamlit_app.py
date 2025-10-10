@@ -77,4 +77,4 @@ if ingredients_list:
 import requests
 # Fetch fruit info from external API
 smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
-st.text(smoothiefroot_response)
+st.text(smoothiefroot_response.json())
