@@ -1,12 +1,34 @@
 # Import python packages
 import streamlit as st 
 from snowflake.snowpark.context import get_active_session
+from snowflake.snowpark import Session
 from snowflake.snowpark.functions import col
 
+
+# Function to get session
+def get_session():
+    try:
+        return get_active_session()
+    except Exception as e:
+        st.warning("Running in local mode. Using manual session config.")
+        connection_parameters = {
+            "account": "MPUIHRC-STB70179",
+            "user": "SHChu",
+            "password": "WjmqyxhHmysb19()",
+            "role": "SYSADMIN",
+            "warehouse": "COMPUTE_WH",
+            "database": "SMOOTHIES",
+            "schema": "PUBLIC"
+        }
+        return Session.builder.configs(connection_parameters).create()
+
+# Get session
+session = get_session()
 
 # Write directly to the app
 # if you're new to Streamlit,** check out our easy-to-follow guides at
 # (https://docs.streamlit.io).
+# App UI
 st.title(f"Customize Your Smoothie! :cup_with_straw: ")
 st.write(
   """Choose the fruits you want in your custom smoothie! 
@@ -16,10 +38,12 @@ st.write(
 name_on_order = st.text_input('Name on Smoothie:')
 st.write('The name on your Smoothie will be:', name_on_order)
 
-session = get_active_session()  
+# session = get_active_session()  
+# Load fruit options
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
 #st.dataframe(data=my_dataframe, use_container_width=True)
 
+# multiselect
 ingredients_list = st.multiselect('Choose up to 5 ingredients:'
                                  , my_dataframe
                                  , max_selections=5
