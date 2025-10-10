@@ -30,13 +30,6 @@ import requests
 smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
 st.text(smoothiefroot_response)
 
-if smoothiefroot_response.status_code == 200:
-    fruit_info = smoothiefroot_response.json()
-    st.subheader("🍉 Watermelon Info from SmoothieFroot API")
-    st.json(fruit_info)
-else:
-    st.warning("Could not fetch watermelon info from SmoothieFroot API.")
-
 # Write directly to the app
 # if you're new to Streamlit,** check out our easy-to-follow guides at
 # (https://docs.streamlit.io).
