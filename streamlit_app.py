@@ -14,7 +14,7 @@ def get_session():
         connection_parameters = {
             "account": "MPUIHRC-STB70179",
             "user": "SHChu",
-            "password": "WjmqyxhHmysb19()",
+            "password": "xxxx",
             "role": "SYSADMIN",
             "warehouse": "COMPUTE_WH",
             "database": "SMOOTHIES",
