@@ -14,7 +14,7 @@ def get_session():
         connection_parameters = {
             "account": "MPUIHRC-STB70179",
             "user": "SHChu",
-            "password": "xxxx",
+            "password": "WjmqyxhHmysb19()",
             "role": "SYSADMIN",
             "warehouse": "COMPUTE_WH",
             "database": "SMOOTHIES",
@@ -24,6 +24,18 @@ def get_session():
 
 # Get session
 session = get_session()
+
+import requests
+# Fetch fruit info from external API
+smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+st.text(smoothiefroot_response)
+
+if smoothiefroot_response.status_code == 200:
+    fruit_info = smoothiefroot_response.json()
+    st.subheader("🍉 Watermelon Info from SmoothieFroot API")
+    st.json(fruit_info)
+else:
+    st.warning("Could not fetch watermelon info from SmoothieFroot API.")
 
 # Write directly to the app
 # if you're new to Streamlit,** check out our easy-to-follow guides at
